@@ -1,0 +1,26 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.CurdModel;
+import com.example.demo.repository.CurdRepo;
+
+@Service
+public class CurdService {
+	@Autowired
+	private CurdRepo curdRepo;
+	
+	public List<CurdModel> getAllTasks(){
+		return curdRepo.findAll();
+		
+	}
+	public CurdModel getTaskById(Long id) {
+		return curdRepo.findById(id).orElse(null);
+	}
+	public CurdModel updateTask(Long id, CurdModel updatedTask) {
+		CurdModel task = curdRepo.findById(id).orElse(null);
+	}
+

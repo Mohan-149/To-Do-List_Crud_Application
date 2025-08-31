@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Task Manager</h2>
+
+  <form (ngSubmit)="addTask()" #taskForm="ngForm">
+    <div class="mb-2">
+      <input type="text" class="form-control" placeholder="Title" [(ngModel)]="newTask.title" name="title" required>
+    </div>
+    <div class="mb-2">
+      <input type="text" class="form-control" placeholder="Description" [(ngModel)]="newTask.description" name="description" required>
+    </div>
+    <div class="form-check mb-2">
+      <input type="checkbox" class="form-check-input" [(ngModel)]="newTask.completed" name="completed">
+      <label class="form-check-label">Completed</label>
+    </div>
+    <button class="btn btn-primary" type="submit">Add Task</button>
+  </form>
+
+  <table class="table table-bordered mt-4">
+    <thead>
+      <tr>
+        <th>ID</th><th>Title</th><th>Description</th><th>Completed</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>{{ task.id }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.completed ? '✅' : '❌' }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" (click)="editTask(task)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteTask(task.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

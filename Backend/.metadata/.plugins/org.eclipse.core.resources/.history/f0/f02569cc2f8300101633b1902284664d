@@ -1,0 +1,40 @@
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.example.demo.model.CurdModel;
+import com.example.demo.service.CurdService;
+
+public class CurdController {
+	@Autowired
+	private CurdService curdService;
+	@GetMapping
+	public List<CurdModel> getAllTasks() {
+		return curdService.getAllTasks();
+	}
+    @GetMapping("/{id}")
+    public CurdModel getTaskById(@PathVariable Long id) {
+    	return curdService.getTaskById(id);
+    }
+    @PostMapping
+    public String createTask(@RequestBody CurdModel task) {
+    	System.out.println("Received POST request: " + task.getTitle());
+    	return "Data inserted successfully :"+curdService.createTask(task);
+    }
+    @PutMapping("/{id}")
+    public CurdModel updateTask(@PathVariable Long id, @RequestBody CurdModel task) {
+    	return curdService.updateTask(id,task);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteTask(@PathVariable Long id) {
+    	curdService.deleteTask(id);
+    }
+}
